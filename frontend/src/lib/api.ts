@@ -1,7 +1,20 @@
 import axios from 'axios';
 
+// Render production backend URL fallback
+const PROD_BACKEND_URL = 'https://staygen.onrender.com/api';
+
+const getBaseURL = () => {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  if (import.meta.env.MODE === 'production') {
+    return PROD_BACKEND_URL;
+  }
+  return '/api';
+};
+
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: getBaseURL(),
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });
@@ -24,7 +37,7 @@ API.interceptors.response.use(
     if (error.response?.status === 401 && error.response?.data?.code === 'TOKEN_EXPIRED' && !original._retry) {
       original._retry = true;
       try {
-        const refreshUrl = (import.meta.env.VITE_API_URL || '/api') + '/auth/refresh';
+        const refreshUrl = `${getBaseURL()}/auth/refresh`;
         const res = await axios.post(refreshUrl, {}, { withCredentials: true });
         const { accessToken } = res.data.data;
         localStorage.setItem('accessToken', accessToken);
