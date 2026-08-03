@@ -53,6 +53,15 @@ body {
   min-height: 100vh;
 }
 
+button, input, select, textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(91, 95, 239, 0.18);
+  color: #0F172A;
+}
+
 body.dark {
   background-color: #0F172A;
   color: #F8FAFC;
@@ -122,6 +131,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Auth Input Controls (Guarantees zero icon overlap across all browsers) */
 .input-auth {
+  display: block !important;
   width: 100% !important;
   height: 50px !important;
   min-height: 50px !important;
@@ -130,6 +140,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #FFFFFF !important;
   font-size: 16px !important; /* Prevents iOS/Android auto-zoom */
   color: #0F172A !important;
+  line-height: 1.25 !important;
   box-sizing: border-box !important;
   transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
 }
@@ -162,6 +173,33 @@ h1, h2, h3, h4, h5, h6 {
 
 .input-has-right-icon {
   padding-right: 48px !important;
+}
+
+/* Shared authentication surface: used by every public account page. */
+.auth-page {
+  background:
+    radial-gradient(circle at top left, rgba(124, 58, 237, 0.10), transparent 30rem),
+    radial-gradient(circle at right bottom, rgba(6, 182, 212, 0.08), transparent 28rem),
+    #F8FAFC;
+}
+
+.dark .auth-page {
+  background:
+    radial-gradient(circle at top left, rgba(124, 58, 237, 0.16), transparent 28rem),
+    #020617;
+}
+
+.auth-card {
+  box-shadow: 0 20px 50px -24px rgba(15, 23, 42, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Accessibility Focus Ring Defaults */

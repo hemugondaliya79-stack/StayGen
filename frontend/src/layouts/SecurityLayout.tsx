@@ -16,7 +16,7 @@ export default function SecurityLayout() {
   const { isDark, toggleTheme } = useTheme();
 
   return (
-    <div className={cn('flex h-screen overflow-hidden', isDark ? 'bg-slate-900' : 'bg-slate-50')}>
+    <div className={cn('flex h-[100dvh] overflow-hidden', isDark ? 'bg-slate-900' : 'bg-slate-50')}>
       {/* Desktop Sidebar */}
       <aside className={cn('hidden lg:flex flex-col w-60 border-r flex-shrink-0 z-20', isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200')}>
         <div className={cn('flex items-center gap-3 px-4 py-5 border-b', isDark ? 'border-slate-800' : 'border-slate-100')}>
@@ -85,7 +85,7 @@ export default function SecurityLayout() {
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-3 xs:p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
           <div className="max-w-7xl mx-auto w-full min-w-0">
             <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}>
               <Outlet />

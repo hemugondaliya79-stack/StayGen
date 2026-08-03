@@ -231,7 +231,7 @@ export default function LandingPage() {
 
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-heading text-slate-900 dark:text-white leading-[1.15] tracking-tight">
               The OS for{' '}
-              <span className="gradient-text block xs:inline">Student Living</span>
+              <span className="gradient-text block sm:inline">Student Living</span>
             </h1>
 
             <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed">
@@ -239,7 +239,7 @@ export default function LandingPage() {
               Streamline room bookings, fee collection, gate security, and student complaints — all in one modern B2B portal.
             </p>
 
-            <div className="flex flex-col xs:flex-row items-stretch xs:items-center gap-3 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <Link
                 to="/register"
                 className="gradient-bg text-white font-semibold px-7 py-3.5 rounded-xl text-base hover:opacity-95 shadow-md shadow-indigo-500/20 flex items-center justify-center gap-2 group min-h-[48px]"

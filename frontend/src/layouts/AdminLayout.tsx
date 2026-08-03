@@ -34,7 +34,7 @@ export default function AdminLayout() {
   const { isDark, toggleTheme } = useTheme();
 
   return (
-    <div className={cn('flex h-screen overflow-hidden', isDark ? 'bg-slate-900' : 'bg-slate-50')}>
+    <div className={cn('flex h-[100dvh] overflow-hidden', isDark ? 'bg-slate-900' : 'bg-slate-50')}>
       {/* Desktop Sidebar (Hidden on mobile <1024px) */}
       <motion.aside
         animate={{ width: collapsed ? 64 : 240 }}
@@ -142,7 +142,7 @@ export default function AdminLayout() {
         </header>
 
         {/* Main Viewport */}
-        <main className="flex-1 overflow-y-auto p-3 xs:p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
           <div className="max-w-7xl mx-auto w-full min-w-0">
             <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}>
               <Outlet />
