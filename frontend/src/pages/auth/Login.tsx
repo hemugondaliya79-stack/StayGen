@@ -27,7 +27,8 @@ export default function LoginPage() {
       await login(data.email, data.password);
       toast.success('Welcome back! 👋');
     } catch (err: any) {
-      toast.error(err?.response?.data?.message || 'Login failed. Check your credentials.');
+      const msg = err?.response?.data?.message || err?.message || 'Login failed. Check your credentials.';
+      toast.error(msg);
     }
   };
 

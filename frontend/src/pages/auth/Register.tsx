@@ -39,7 +39,8 @@ export default function RegisterPage() {
       });
       toast.success('Account created successfully! 🎉');
     } catch (err: any) {
-      toast.error(err?.response?.data?.message || 'Registration failed. Try again.');
+      const msg = err?.response?.data?.message || err?.message || 'Registration failed. Please try again.';
+      toast.error(msg);
     }
   };
 

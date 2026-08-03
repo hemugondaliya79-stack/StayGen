@@ -47,8 +47,23 @@ const studentSchema = new mongoose.Schema({
 // Auto-generate student ID
 studentSchema.pre('save', async function () {
   if (!this.studentId) {
-    const count = await mongoose.model('Student').countDocuments();
-    this.studentId = `STU${String(count + 1).padStart(4, '0')}`;
+    let unique = false;
+    let newId = '';
+    let attempts = 0;
+    while (!unique && attempts < 10) {
+      const count = await mongoose.model('Student').countDocuments();
+      newId = `STU${String(count + 1 + attempts).padStart(4, '0')}`;
+      const existing = await mongoose.model('Student').findOne({ studentId: newId });
+      if (!existing) {
+        unique = true;
+      } else {
+        attempts++;
+      }
+    }
+    if (!unique) {
+      newId = `STU${Date.now().toString().slice(-6)}`;
+    }
+    this.studentId = newId;
   }
   // Calculate profile completion
   let completed = 0;
