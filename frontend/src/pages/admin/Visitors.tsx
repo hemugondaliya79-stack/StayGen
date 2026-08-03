@@ -41,7 +41,7 @@ export default function VisitorsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 md:gap-6">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white font-heading">Visitor Management</h1>
           <p className="text-slate-500 text-sm mt-1">{pagination.total || 0} visitor requests</p>
@@ -56,28 +56,28 @@ export default function VisitorsPage() {
       </div>
 
       {isLoading ? (
-        <div className="space-y-4">{Array(4).fill(0).map((_, i) => <div key={i} className="skeleton h-28 rounded-2xl" />)}</div>
+        <div className="space-y-4 md:space-y-6">{Array(4).fill(0).map((_, i) => <div key={i} className="skeleton h-28 rounded-2xl" />)}</div>
       ) : visitors.length === 0 ? (
         <div className="text-center py-20 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700">
           <UserCheck size={48} className="text-slate-200 mx-auto mb-4" />
           <p className="text-slate-500 font-medium">No visitors found</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4 md:space-y-6">
           {visitors.map((v: any, i: number) => (
             <motion.div key={v._id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
               className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-5">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 flex-wrap mb-2">
                     <h3 className="font-semibold text-slate-900 dark:text-white">{v.visitorName}</h3>
                     <span className={cn('text-xs px-2 py-0.5 rounded-full font-medium', getStatusColor(v.status))}>{v.status.replace('_', ' ')}</span>
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-slate-500">
-                    <span>📞 {v.visitorPhone}</span>
-                    <span>👤 {v.relation || 'Guest'}</span>
-                    <span>🎯 {v.purpose || 'Visit'}</span>
-                    <span>📅 {formatDate(v.expectedDate)}</span>
+                    <span>ðŸ“ž {v.visitorPhone}</span>
+                    <span>ðŸ‘¤ {v.relation || 'Guest'}</span>
+                    <span>ðŸŽ¯ {v.purpose || 'Visit'}</span>
+                    <span>ðŸ“… {formatDate(v.expectedDate)}</span>
                   </div>
                   <div className="mt-2 text-xs text-slate-500">
                     Student: <strong className="text-slate-700 dark:text-slate-300">{v.studentId?.userId?.name}</strong>

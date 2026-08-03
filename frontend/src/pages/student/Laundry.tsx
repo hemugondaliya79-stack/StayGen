@@ -11,7 +11,7 @@ const fetchMyLaundry = () => API.get('/laundry/my').then(r => r.data.data);
 
 const STATUS_STEPS = ['requested', 'picked_up', 'in_progress', 'ready', 'delivered'];
 const STATUS_ICONS: Record<string, string> = {
-  requested: '📋', picked_up: '🧺', in_progress: '🔄', ready: '✅', delivered: '📦'
+  requested: 'ðŸ“‹', picked_up: 'ðŸ§º', in_progress: 'ðŸ”„', ready: 'âœ…', delivered: 'ðŸ“¦'
 };
 
 export default function StudentLaundry() {
@@ -52,13 +52,13 @@ export default function StudentLaundry() {
           <p className="text-slate-500">No laundry requests yet</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4 md:space-y-6">
           {requests.map((r: any, i: number) => (
             <motion.div key={r._id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
               className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-5">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <span className="text-xl">👕</span>
+                  <span className="text-xl">ðŸ‘•</span>
                   <div>
                     <p className="font-semibold text-slate-900 dark:text-white">{r.totalItems} items</p>
                     <p className="text-xs text-slate-500">Pickup: {formatDate(r.pickupDate)}</p>
@@ -75,7 +75,7 @@ export default function StudentLaundry() {
                   return (
                     <div key={step} className="flex items-center flex-1">
                       <div className={cn('w-6 h-6 rounded-full flex items-center justify-center text-xs flex-shrink-0 transition-all', done ? 'gradient-bg text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-400')}>
-                        {done ? '✓' : j + 1}
+                        {done ? 'âœ“' : j + 1}
                       </div>
                       {j < STATUS_STEPS.length - 1 && (
                         <div className={cn('flex-1 h-0.5 mx-1', j < stepIdx ? 'gradient-bg' : 'bg-slate-100 dark:bg-slate-700')} />
@@ -89,7 +89,7 @@ export default function StudentLaundry() {
                 <div className="flex flex-wrap gap-2">
                   {r.items.map((item: any, j: number) => (
                     <span key={j} className="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-full">
-                      {item.name} ×{item.quantity}
+                      {item.name} Ã—{item.quantity}
                     </span>
                   ))}
                 </div>
@@ -108,7 +108,7 @@ export default function StudentLaundry() {
                 <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">New Laundry Request</h2>
                 <button onClick={() => setShowModal(false)} className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"><X size={18} /></button>
               </div>
-              <form onSubmit={handleSubmit(d => createRequest.mutate(d))} className="space-y-4">
+              <form onSubmit={handleSubmit(d => createRequest.mutate(d))} className="space-y-4 md:space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Pickup Date *</label>
                   <input {...register('pickupDate', { required: true })} type="date" min={new Date().toISOString().split('T')[0]} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />

@@ -12,7 +12,7 @@ const fetchItems = async (type: string) => {
 };
 
 const CATEGORY_ICONS: Record<string, string> = {
-  electronics: '💻', clothing: '👕', documents: '📄', accessories: '⌚', books: '📚', other: '📦'
+  electronics: 'ðŸ’»', clothing: 'ðŸ‘•', documents: 'ðŸ“„', accessories: 'âŒš', books: 'ðŸ“š', other: 'ðŸ“¦'
 };
 
 export default function LostFoundPage() {
@@ -37,7 +37,7 @@ export default function LostFoundPage() {
       </div>
 
       {isLoading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {Array(6).fill(0).map((_, i) => <div key={i} className="skeleton h-40 rounded-2xl" />)}
         </div>
       ) : !items?.length ? (
@@ -46,12 +46,12 @@ export default function LostFoundPage() {
           <p className="text-slate-500">No items reported</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {items.map((item: any, i: number) => (
             <motion.div key={item._id} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.04 }}
               className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-4 hover:shadow-md transition-all">
               <div className="flex items-start gap-3 mb-3">
-                <span className="text-2xl">{CATEGORY_ICONS[item.category] || '📦'}</span>
+                <span className="text-2xl">{CATEGORY_ICONS[item.category] || 'ðŸ“¦'}</span>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 flex-wrap">
                     <h3 className="font-semibold text-slate-900 dark:text-white text-sm">{item.title}</h3>
@@ -69,9 +69,9 @@ export default function LostFoundPage() {
                 </div>
               )}
               <div className="text-xs text-slate-500 space-y-1">
-                {item.location && <p>📍 {item.location}</p>}
-                <p>📅 {formatDate(item.date)}</p>
-                <p>👤 {item.reportedBy?.name}</p>
+                {item.location && <p>ðŸ“ {item.location}</p>}
+                <p>ðŸ“… {formatDate(item.date)}</p>
+                <p>ðŸ‘¤ {item.reportedBy?.name}</p>
               </div>
             </motion.div>
           ))}

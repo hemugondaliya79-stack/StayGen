@@ -82,7 +82,7 @@ const faqs = [
 const pricing = [
   {
     name: 'Starter',
-    price: '₹2,999',
+    price: 'â‚¹2,999',
     period: '/month',
     desc: 'Ideal for small or independent hostels',
     students: 'Up to 100 students included',
@@ -97,7 +97,7 @@ const pricing = [
   },
   {
     name: 'Growth',
-    price: '₹5,999',
+    price: 'â‚¹5,999',
     period: '/month',
     desc: 'Most popular for mid-size institutions',
     students: 'Up to 500 students included',
@@ -161,7 +161,7 @@ export default function LandingPage() {
           </nav>
 
           {/* Desktop Action Buttons */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4 md:gap-6">
             <Link
               to="/login"
               className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 transition-colors"
@@ -226,7 +226,7 @@ export default function LandingPage() {
           <div className="lg:col-span-7 space-y-6 text-left">
             <div className="inline-flex items-center gap-2 bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200/80 dark:border-indigo-800/80 rounded-full px-4 py-1.5 text-xs sm:text-sm font-semibold text-indigo-700 dark:text-indigo-300">
               <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse flex-shrink-0" />
-              <span>Next-Gen Hostel OS — Version 2.0 Live</span>
+              <span>Next-Gen Hostel OS â€” Version 2.0 Live</span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-heading text-slate-900 dark:text-white leading-[1.15] tracking-tight">
@@ -236,7 +236,7 @@ export default function LandingPage() {
 
             <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed">
               StayGen replaces manual paper registers with an intelligent, automated platform.
-              Streamline room bookings, fee collection, gate security, and student complaints — all in one modern B2B portal.
+              Streamline room bookings, fee collection, gate security, and student complaints â€” all in one modern B2B portal.
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
@@ -293,7 +293,7 @@ export default function LandingPage() {
               </div>
 
               {/* Mockup Dashboard Content Grid */}
-              <div className="p-4 sm:p-5 space-y-4">
+              <div className="p-4 sm:p-5 space-y-4 md:space-y-6">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="bg-slate-800/90 rounded-xl p-3 border border-slate-700/50">
                     <p className="text-slate-400 text-xs mb-1">Total Students</p>
@@ -307,7 +307,7 @@ export default function LandingPage() {
                   </div>
                   <div className="bg-slate-800/90 rounded-xl p-3 border border-slate-700/50">
                     <p className="text-slate-400 text-xs mb-1">Monthly Revenue</p>
-                    <p className="text-xl font-bold text-white font-heading">₹2.4L</p>
+                    <p className="text-xl font-bold text-white font-heading">â‚¹2.4L</p>
                     <p className="text-xs text-indigo-400 font-semibold mt-0.5">+8% collected</p>
                   </div>
                   <div className="bg-slate-800/90 rounded-xl p-3 border border-slate-700/50">
@@ -318,7 +318,7 @@ export default function LandingPage() {
                 </div>
 
                 {/* Mini Bar Chart Preview */}
-                <div className="bg-slate-800/90 rounded-xl p-4 border border-slate-700/50">
+                <div className="bg-slate-800/90 rounded-xl p-4 md:p-6 border border-slate-700/50">
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-xs font-semibold text-slate-300">Occupancy & Revenue Trend</span>
                     <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-medium">Updated Live</span>
@@ -346,7 +346,7 @@ export default function LandingPage() {
       {/* Stats Section */}
       <section className="py-16 sm:py-20 bg-white dark:bg-slate-900/60 border-y border-slate-200/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 sm:gap-6">
             {[
               { value: '500+', label: 'Hostels Managed' },
               { value: '50,000+', label: 'Active Resident Students' },
@@ -355,7 +355,7 @@ export default function LandingPage() {
             ].map((stat, idx) => (
               <div
                 key={idx}
-                className="bg-[#F8FAFC] dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl p-5 sm:p-6 text-center shadow-xs"
+                className="bg-[#F8FAFC] dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 rounded-2xl p-4 md:p-6 sm:p-6 text-center shadow-xs"
               >
                 <p className="text-2xl sm:text-4xl font-extrabold gradient-text font-heading">{stat.value}</p>
                 <p className="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 mt-1.5">{stat.label}</p>
@@ -511,7 +511,7 @@ export default function LandingPage() {
               <div key={idx} className="card-clean overflow-hidden">
                 <button
                   onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="w-full flex items-center justify-between p-5 text-left gap-4 font-semibold text-slate-900 dark:text-white text-sm sm:text-base min-h-[48px]"
+                  className="w-full flex items-center justify-between p-5 text-left gap-4 md:gap-6 font-semibold text-slate-900 dark:text-white text-sm sm:text-base min-h-[48px]"
                 >
                   <span>{faq.q}</span>
                   <ChevronDown size={20} className={`text-slate-400 transition-transform duration-200 flex-shrink-0 ${openFaq === idx ? 'rotate-180 text-indigo-500' : ''}`} />
@@ -552,7 +552,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
             {/* Brand column */}
-            <div className="space-y-4 md:col-span-1">
+            <div className="space-y-4 md:space-y-6 md:col-span-1">
               <div className="flex items-center gap-2.5">
                 <div className="w-9 h-9 rounded-xl gradient-bg flex items-center justify-center">
                   <span className="text-white font-extrabold text-sm font-heading">S</span>
@@ -599,7 +599,7 @@ export default function LandingPage() {
           </div>
 
           <div className="pt-8 text-center text-xs text-slate-500">
-            <p>© {new Date().getFullYear()} StayGen Platform. All rights reserved. Built for modern hostel management.</p>
+            <p>Â© {new Date().getFullYear()} StayGen Platform. All rights reserved. Built for modern hostel management.</p>
           </div>
         </div>
       </footer>

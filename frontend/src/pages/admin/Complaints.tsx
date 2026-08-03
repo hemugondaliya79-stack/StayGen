@@ -14,8 +14,8 @@ const fetchComplaints = async (page: number, status: string, category: string) =
 
 const STATUS_FLOW = ['open', 'in_progress', 'resolved', 'closed'];
 const CATEGORY_ICONS: Record<string, string> = {
-  maintenance: '🔧', electrical: '⚡', plumbing: '🚰', cleanliness: '🧹',
-  food: '🍽️', security: '🛡️', staff: '👤', other: '📋',
+  maintenance: 'ðŸ”§', electrical: 'âš¡', plumbing: 'ðŸš°', cleanliness: 'ðŸ§¹',
+  food: 'ðŸ½ï¸', security: 'ðŸ›¡ï¸', staff: 'ðŸ‘¤', other: 'ðŸ“‹',
 };
 
 export default function ComplaintsPage() {
@@ -39,7 +39,7 @@ export default function ComplaintsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 md:gap-6">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white font-heading">Complaints</h1>
           <p className="text-slate-500 text-sm mt-1">{pagination.total || 0} total complaints</p>
@@ -64,14 +64,14 @@ export default function ComplaintsPage() {
 
       {/* Cards */}
       {isLoading ? (
-        <div className="grid gap-4">{Array(4).fill(0).map((_, i) => <div key={i} className="skeleton h-28 rounded-2xl" />)}</div>
+        <div className="grid gap-4 md:gap-6">{Array(4).fill(0).map((_, i) => <div key={i} className="skeleton h-28 rounded-2xl" />)}</div>
       ) : complaints.length === 0 ? (
         <div className="text-center py-20 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700">
           <CheckCircle size={48} className="text-emerald-200 mx-auto mb-4" />
-          <p className="text-slate-500 font-medium">No complaints found 🎉</p>
+          <p className="text-slate-500 font-medium">No complaints found ðŸŽ‰</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4 md:space-y-6">
           {complaints.map((c: any, i: number) => (
             <motion.div
               key={c._id}
@@ -80,19 +80,19 @@ export default function ComplaintsPage() {
               transition={{ delay: i * 0.05 }}
               className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-5 hover:shadow-md transition-all"
             >
-              <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-start gap-4 md:gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 flex-wrap mb-2">
-                    <span className="text-lg">{CATEGORY_ICONS[c.category] || '📋'}</span>
+                    <span className="text-lg">{CATEGORY_ICONS[c.category] || 'ðŸ“‹'}</span>
                     <h3 className="font-semibold text-slate-900 dark:text-white">{c.title}</h3>
                     <span className={cn('text-xs px-2 py-0.5 rounded-full font-medium', getStatusColor(c.status))}>{c.status.replace('_', ' ')}</span>
                     <span className={cn('text-xs px-2 py-0.5 rounded-full font-medium', getPriorityColor(c.priority))}>{c.priority}</span>
                   </div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 mb-3 line-clamp-2">{c.description}</p>
-                  <div className="flex items-center gap-4 text-xs text-slate-500">
+                  <div className="flex items-center gap-4 md:gap-6 text-xs text-slate-500">
                     <span>By: <strong className="text-slate-700 dark:text-slate-300">{c.studentId?.userId?.name}</strong></span>
                     <span>{formatRelativeTime(c.createdAt)}</span>
-                    {c.images?.length > 0 && <span>📷 {c.images.length} image{c.images.length > 1 ? 's' : ''}</span>}
+                    {c.images?.length > 0 && <span>ðŸ“· {c.images.length} image{c.images.length > 1 ? 's' : ''}</span>}
                   </div>
                 </div>
                 <div className="flex gap-2 flex-shrink-0">
@@ -102,7 +102,7 @@ export default function ComplaintsPage() {
                       onClick={() => updateStatus.mutate({ id: c._id, status: nextStatus, message: `Status changed to ${nextStatus}` })}
                       className={cn('px-3 py-1.5 rounded-xl text-xs font-medium transition-all border', nextStatus === 'resolved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100' : nextStatus === 'in_progress' ? 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100' : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100')}
                     >
-                      → {nextStatus.replace('_', ' ')}
+                      â†’ {nextStatus.replace('_', ' ')}
                     </button>
                   ))}
                 </div>

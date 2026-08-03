@@ -27,7 +27,7 @@ export default function StudentAttendance() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6">
         {[
           { label: 'Total Days', value: stats.total || 0, color: 'bg-slate-500' },
           { label: 'Present', value: stats.present || 0, color: 'bg-emerald-500' },
@@ -35,7 +35,7 @@ export default function StudentAttendance() {
           { label: 'Percentage', value: `${stats.percentage || 0}%`, color: stats.percentage >= 75 ? 'bg-indigo-500' : 'bg-red-500' },
         ].map((s, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-100 dark:border-slate-700 text-center">
+            className="bg-white dark:bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-100 dark:border-slate-700 text-center">
             <div className={cn('w-3 h-3 rounded-full mx-auto mb-2', s.color)} />
             <p className="text-2xl font-bold text-slate-900 dark:text-white font-heading">{s.value}</p>
             <p className="text-xs text-slate-500 mt-1">{s.label}</p>
@@ -59,7 +59,7 @@ export default function StudentAttendance() {
         </div>
         <div className="mt-2 flex justify-between text-xs text-slate-400">
           <span>0%</span>
-          <span className="text-amber-600 font-medium">⚠️ 75% minimum</span>
+          <span className="text-amber-600 font-medium">âš ï¸ 75% minimum</span>
           <span>100%</span>
         </div>
       </div>
@@ -91,8 +91,8 @@ export default function StudentAttendance() {
                     <td className="px-5 py-3">
                       <span className={cn('text-xs px-2.5 py-1 rounded-full font-medium', STATUS_STYLE[r.status] || 'bg-slate-100 text-slate-700')}>{r.status}</span>
                     </td>
-                    <td className="px-5 py-3 text-sm text-slate-500 hidden sm:table-cell">{r.checkInTime || '—'}</td>
-                    <td className="px-5 py-3 text-sm text-slate-500 hidden sm:table-cell">{r.note || '—'}</td>
+                    <td className="px-5 py-3 text-sm text-slate-500 hidden sm:table-cell">{r.checkInTime || 'â€”'}</td>
+                    <td className="px-5 py-3 text-sm text-slate-500 hidden sm:table-cell">{r.note || 'â€”'}</td>
                   </tr>
                 ))}
               </tbody>

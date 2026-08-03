@@ -124,7 +124,7 @@ export default function AdminLayout() {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Top App Header */}
-        <header className={cn('flex items-center justify-between px-4 lg:px-6 py-3 border-b flex-shrink-0 min-h-[56px]', isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200')}>
+        <header className={cn('flex items-center justify-between px-4 md:px-6 lg:px-8 py-3 md:py-4 border-b flex-shrink-0 min-h-[56px]', isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200')}>
           {/* Mobile Hamburger Drawer Trigger */}
           <MobileMenu navItems={navItems} title="StayGen" subtitle="Admin Panel" />
 
@@ -142,7 +142,7 @@ export default function AdminLayout() {
         </header>
 
         {/* Main Viewport */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
           <div className="max-w-7xl mx-auto w-full min-w-0">
             <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}>
               <Outlet />

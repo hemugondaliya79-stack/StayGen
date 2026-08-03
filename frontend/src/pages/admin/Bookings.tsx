@@ -37,7 +37,7 @@ export default function BookingsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 md:gap-6">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white font-heading">Bookings</h1>
           <p className="text-slate-500 text-sm mt-1">{pagination.total || 0} total bookings</p>
@@ -80,7 +80,7 @@ export default function BookingsPage() {
                   <td className="px-5 py-4 hidden sm:table-cell">
                     <div>
                       <p className="text-sm font-semibold text-slate-900 dark:text-white">Room {b.roomId?.roomNumber}</p>
-                      <p className="text-xs text-slate-500">{b.roomId?.type} • ₹{b.roomId?.price}/mo</p>
+                      <p className="text-xs text-slate-500">{b.roomId?.type} â€¢ â‚¹{b.roomId?.price}/mo</p>
                     </div>
                   </td>
                   <td className="px-5 py-4">
@@ -99,7 +99,7 @@ export default function BookingsPage() {
                         </button>
                       </div>
                     )}
-                    {b.status !== 'pending' && <span className="text-xs text-slate-400">—</span>}
+                    {b.status !== 'pending' && <span className="text-xs text-slate-400">â€”</span>}
                   </td>
                 </motion.tr>
               ))}

@@ -25,7 +25,7 @@ export default function LoginPage() {
   const onSubmit = async (data: FormData) => {
     try {
       await login(data.email, data.password);
-      toast.success('Welcome back! 👋');
+      toast.success('Welcome back! ðŸ‘‹');
     } catch (err: any) {
       const msg = err?.response?.data?.message || err?.message || 'Login failed. Check your credentials.';
       toast.error(msg);
@@ -60,9 +60,9 @@ export default function LoginPage() {
           </div>
 
           {/* Demo credentials info box */}
-          <div className="bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200/80 dark:border-indigo-800/80 rounded-xl p-4 mb-6">
+          <div className="bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200/80 dark:border-indigo-800/80 rounded-xl p-4 md:p-6 mb-6">
             <p className="text-xs font-bold text-indigo-700 dark:text-indigo-300 mb-1.5 uppercase tracking-wider">
-              🔑 Demo Credentials
+              ðŸ”‘ Demo Credentials
             </p>
             <div className="space-y-1 text-xs text-indigo-900 dark:text-indigo-200 font-mono">
               <p><span className="font-semibold text-slate-600 dark:text-slate-400">Admin:</span> admin@staygen.com / Admin@123</p>

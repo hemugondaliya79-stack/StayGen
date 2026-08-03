@@ -15,7 +15,7 @@ const StatCard = ({ icon: Icon, label, value, sub, color, delay = 0 }: any) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay }}
-    className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-100 dark:border-slate-700 hover:shadow-lg hover:shadow-indigo-500/5 transition-all group"
+    className="bg-white dark:bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-100 dark:border-slate-700 hover:shadow-lg hover:shadow-indigo-500/5 transition-all group"
   >
     <div className="flex items-start justify-between mb-4">
       <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${color}`}>
@@ -30,7 +30,7 @@ const StatCard = ({ icon: Icon, label, value, sub, color, delay = 0 }: any) => (
 );
 
 const SkeletonCard = () => (
-  <div className="bg-white rounded-2xl p-5 border border-slate-100">
+  <div className="bg-white rounded-2xl p-4 md:p-6 border border-slate-100">
     <div className="skeleton w-11 h-11 rounded-xl mb-4" />
     <div className="skeleton h-7 w-24 mb-2" />
     <div className="skeleton h-4 w-32" />
@@ -78,7 +78,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stat cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {isLoading
           ? Array(8).fill(0).map((_, i) => <SkeletonCard key={i} />)
           : statCards.map((card, i) => <StatCard key={i} {...card} delay={i * 0.05} />)
@@ -88,7 +88,7 @@ export default function AdminDashboard() {
       {/* Charts */}
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Revenue chart */}
-        <div className="lg:col-span-2 bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-100 dark:border-slate-700">
+        <div className="lg:col-span-2 bg-white dark:bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-100 dark:border-slate-700">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h3 className="font-semibold text-slate-900 dark:text-white font-heading">Revenue Overview</h3>
@@ -109,7 +109,7 @@ export default function AdminDashboard() {
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" />
                 <XAxis dataKey="month" tick={{ fontSize: 12, fill: '#94A3B8' }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fontSize: 12, fill: '#94A3B8' }} axisLine={false} tickLine={false} tickFormatter={v => `₹${(v / 1000).toFixed(0)}k`} />
+                <YAxis tick={{ fontSize: 12, fill: '#94A3B8' }} axisLine={false} tickLine={false} tickFormatter={v => `â‚¹${(v / 1000).toFixed(0)}k`} />
                 <Tooltip formatter={(v: any) => [formatCurrency(v), 'Revenue']} contentStyle={{ borderRadius: 12, border: '1px solid #E2E8F0', boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }} />
                 <Area type="monotone" dataKey="revenue" stroke="#5B5FEF" strokeWidth={2.5} fill="url(#colorRevenue)" dot={{ fill: '#5B5FEF', r: 4 }} activeDot={{ r: 6 }} />
               </AreaChart>
@@ -118,7 +118,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Pie chart */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-100 dark:border-slate-700">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-100 dark:border-slate-700">
           <h3 className="font-semibold text-slate-900 dark:text-white font-heading mb-6">Room Status</h3>
           {isLoading ? (
             <div className="skeleton h-48 rounded-xl" />
@@ -151,7 +151,7 @@ export default function AdminDashboard() {
       {/* Recent Activity */}
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Recent bookings */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-100 dark:border-slate-700">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-100 dark:border-slate-700">
           <h3 className="font-semibold text-slate-900 dark:text-white font-heading mb-4">Recent Bookings</h3>
           {isLoading ? (
             <div className="space-y-3">{Array(3).fill(0).map((_, i) => <div key={i} className="skeleton h-14 rounded-xl" />)}</div>
@@ -179,7 +179,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Recent complaints */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-100 dark:border-slate-700">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-100 dark:border-slate-700">
           <h3 className="font-semibold text-slate-900 dark:text-white font-heading mb-4">Recent Complaints</h3>
           {isLoading ? (
             <div className="space-y-3">{Array(3).fill(0).map((_, i) => <div key={i} className="skeleton h-14 rounded-xl" />)}</div>
@@ -192,7 +192,7 @@ export default function AdminDashboard() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-slate-900 dark:text-white truncate">{c.title}</p>
-                    <p className="text-xs text-slate-500">{c.studentId?.userId?.name} · {formatRelativeTime(c.createdAt)}</p>
+                    <p className="text-xs text-slate-500">{c.studentId?.userId?.name} Â· {formatRelativeTime(c.createdAt)}</p>
                   </div>
                   <span className={cn('text-xs px-2 py-1 rounded-full font-medium', getStatusColor(c.status))}>{c.status}</span>
                 </div>
@@ -201,7 +201,7 @@ export default function AdminDashboard() {
           ) : (
             <div className="text-center py-8">
               <CheckCircle size={32} className="text-emerald-300 mx-auto mb-2" />
-              <p className="text-slate-500 text-sm">No open complaints 🎉</p>
+              <p className="text-slate-500 text-sm">No open complaints ðŸŽ‰</p>
             </div>
           )}
         </div>

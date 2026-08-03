@@ -10,8 +10,8 @@ import toast from 'react-hot-toast';
 const fetchMyComplaints = () => API.get('/complaints/my').then(r => r.data.data);
 
 const CATEGORY_ICONS: Record<string, string> = {
-  maintenance: '🔧', electrical: '⚡', plumbing: '🚰', cleanliness: '🧹',
-  food: '🍽️', security: '🛡️', staff: '👤', other: '📋',
+  maintenance: 'ðŸ”§', electrical: 'âš¡', plumbing: 'ðŸš°', cleanliness: 'ðŸ§¹',
+  food: 'ðŸ½ï¸', security: 'ðŸ›¡ï¸', staff: 'ðŸ‘¤', other: 'ðŸ“‹',
 };
 
 export default function StudentComplaints() {
@@ -47,7 +47,7 @@ export default function StudentComplaints() {
       </div>
 
       {isLoading ? (
-        <div className="space-y-4">{Array(3).fill(0).map((_, i) => <div key={i} className="skeleton h-28 rounded-2xl" />)}</div>
+        <div className="space-y-4 md:space-y-6">{Array(3).fill(0).map((_, i) => <div key={i} className="skeleton h-28 rounded-2xl" />)}</div>
       ) : !complaints?.length ? (
         <div className="text-center py-20 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700">
           <AlertCircle size={48} className="text-slate-200 mx-auto mb-4" />
@@ -55,12 +55,12 @@ export default function StudentComplaints() {
           <p className="text-slate-400 text-sm mt-1">Raise a complaint if you face any issues</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4 md:space-y-6">
           {complaints.map((c: any, i: number) => (
             <motion.div key={c._id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
               className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-5">
               <div className="flex items-start gap-3">
-                <span className="text-xl flex-shrink-0">{CATEGORY_ICONS[c.category] || '📋'}</span>
+                <span className="text-xl flex-shrink-0">{CATEGORY_ICONS[c.category] || 'ðŸ“‹'}</span>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
                     <h3 className="font-semibold text-slate-900 dark:text-white">{c.title}</h3>
@@ -100,12 +100,12 @@ export default function StudentComplaints() {
                 <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">Raise a Complaint</h2>
                 <button onClick={() => setShowModal(false)} className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"><X size={18} /></button>
               </div>
-              <form onSubmit={handleSubmit(d => createComplaint.mutate(d))} className="space-y-4">
+              <form onSubmit={handleSubmit(d => createComplaint.mutate(d))} className="space-y-4 md:space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Title *</label>
                   <input {...register('title', { required: true })} placeholder="Brief description of issue" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Category</label>
                     <select {...register('category')} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
@@ -128,7 +128,7 @@ export default function StudentComplaints() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Images (optional)</label>
-                  <label className="flex items-center gap-2 border-2 border-dashed border-slate-200 dark:border-slate-600 rounded-xl p-4 cursor-pointer hover:border-indigo-300 transition-colors">
+                  <label className="flex items-center gap-2 border-2 border-dashed border-slate-200 dark:border-slate-600 rounded-xl p-4 md:p-6 cursor-pointer hover:border-indigo-300 transition-colors">
                     <Upload size={16} className="text-slate-400" />
                     <span className="text-sm text-slate-500">Upload photos of the issue</span>
                     <input type="file" multiple accept="image/*" className="hidden" onChange={e => setImages(Array.from(e.target.files || []))} />

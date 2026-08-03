@@ -15,6 +15,7 @@ const roomSchema = new mongoose.Schema({
   students: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Student' }],
   hostelId: { type: mongoose.Schema.Types.ObjectId, ref: 'Hostel' },
   status: { type: String, enum: ['available', 'occupied', 'maintenance', 'reserved'], default: 'available' },
+  featured: { type: Boolean, default: false },
   description: { type: String },
 }, { timestamps: true });
 

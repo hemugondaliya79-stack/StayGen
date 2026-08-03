@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 const fetchLostFound = (type: string) => API.get(`/lost-found?limit=20${type ? `&type=${type}` : ''}`).then(r => r.data.data);
 
 const CATEGORY_ICONS: Record<string, string> = {
-  electronics: '💻', clothing: '👕', documents: '📄', accessories: '⌚', books: '📚', other: '📦'
+  electronics: 'ðŸ’»', clothing: 'ðŸ‘•', documents: 'ðŸ“„', accessories: 'âŒš', books: 'ðŸ“š', other: 'ðŸ“¦'
 };
 
 export default function StudentLostFound() {
@@ -47,29 +47,29 @@ export default function StudentLostFound() {
       <div className="flex gap-2">
         {['', 'lost', 'found'].map(t => (
           <button key={t} onClick={() => setType(t)} className={cn('px-4 py-2 rounded-xl text-sm font-medium transition-all', type === t ? 'gradient-bg text-white' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400')}>
-            {t === '' ? 'All' : t === 'lost' ? '🔴 Lost' : '🟢 Found'}
+            {t === '' ? 'All' : t === 'lost' ? 'ðŸ”´ Lost' : 'ðŸŸ¢ Found'}
           </button>
         ))}
       </div>
 
       {isLoading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">{Array(6).fill(0).map((_, i) => <div key={i} className="skeleton h-40 rounded-2xl" />)}</div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">{Array(6).fill(0).map((_, i) => <div key={i} className="skeleton h-40 rounded-2xl" />)}</div>
       ) : !items?.length ? (
         <div className="text-center py-20 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700">
           <Search size={48} className="text-slate-200 mx-auto mb-4" />
           <p className="text-slate-500">Nothing reported yet</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {items.map((item: any, i: number) => (
             <motion.div key={item._id} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.04 }}
               className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-4 hover:shadow-md transition-all">
               <div className="flex items-start gap-3 mb-3">
-                <span className="text-2xl">{CATEGORY_ICONS[item.category] || '📦'}</span>
+                <span className="text-2xl">{CATEGORY_ICONS[item.category] || 'ðŸ“¦'}</span>
                 <div className="flex-1">
                   <h3 className="font-semibold text-slate-900 dark:text-white text-sm">{item.title}</h3>
                   <span className={cn('text-xs px-2 py-0.5 rounded-full font-medium', item.type === 'lost' ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700')}>
-                    {item.type === 'lost' ? '🔴 Lost' : '🟢 Found'}
+                    {item.type === 'lost' ? 'ðŸ”´ Lost' : 'ðŸŸ¢ Found'}
                   </span>
                 </div>
               </div>
@@ -82,9 +82,9 @@ export default function StudentLostFound() {
                 </div>
               )}
               <div className="text-xs text-slate-500 space-y-1">
-                {item.location && <p>📍 {item.location}</p>}
-                <p>📅 {formatDate(item.date || item.createdAt)}</p>
-                {item.contactInfo && <p>📞 Contact: {item.contactInfo}</p>}
+                {item.location && <p>ðŸ“ {item.location}</p>}
+                <p>ðŸ“… {formatDate(item.date || item.createdAt)}</p>
+                {item.contactInfo && <p>ðŸ“ž Contact: {item.contactInfo}</p>}
               </div>
             </motion.div>
           ))}
@@ -100,8 +100,8 @@ export default function StudentLostFound() {
                 <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">Report Lost/Found Item</h2>
                 <button onClick={() => setShowModal(false)} className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"><X size={18} /></button>
               </div>
-              <form onSubmit={handleSubmit(d => report.mutate(d))} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit(d => report.mutate(d))} className="space-y-4 md:space-y-6">
+                <div className="grid grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Type *</label>
                     <select {...register('type', { required: true })} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
@@ -124,7 +124,7 @@ export default function StudentLostFound() {
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Description</label>
                   <textarea {...register('description')} rows={3} placeholder="Describe the item in detail..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Last seen location</label>
                     <input {...register('location')} placeholder="e.g. Library, Room 201" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
@@ -136,7 +136,7 @@ export default function StudentLostFound() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Photos (optional)</label>
-                  <label className="flex items-center gap-2 border-2 border-dashed border-slate-200 dark:border-slate-600 rounded-xl p-4 cursor-pointer hover:border-indigo-300">
+                  <label className="flex items-center gap-2 border-2 border-dashed border-slate-200 dark:border-slate-600 rounded-xl p-4 md:p-6 cursor-pointer hover:border-indigo-300">
                     <Upload size={16} className="text-slate-400" />
                     <span className="text-sm text-slate-500">Upload images</span>
                     <input type="file" multiple accept="image/*" className="hidden" onChange={e => setImages(Array.from(e.target.files || []))} />

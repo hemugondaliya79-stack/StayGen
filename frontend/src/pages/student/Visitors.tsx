@@ -42,21 +42,21 @@ export default function StudentVisitors() {
           <p className="text-slate-400 text-sm mt-1">Pre-register visitors to get a QR code for easy entry</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4 md:space-y-6">
           {visitors.map((v: any, i: number) => (
             <motion.div key={v._id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
               className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-5">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
                     <h3 className="font-semibold text-slate-900 dark:text-white">{v.visitorName}</h3>
                     <span className={cn('text-xs px-2 py-0.5 rounded-full font-medium', getStatusColor(v.status))}>{v.status.replace('_', ' ')}</span>
                   </div>
                   <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-slate-500">
-                    <span>📞 {v.visitorPhone}</span>
-                    <span>👥 {v.relation || 'Guest'}</span>
-                    <span>📅 {formatDate(v.expectedDate)}</span>
-                    <span>🎯 {v.purpose}</span>
+                    <span>ðŸ“ž {v.visitorPhone}</span>
+                    <span>ðŸ‘¥ {v.relation || 'Guest'}</span>
+                    <span>ðŸ“… {formatDate(v.expectedDate)}</span>
+                    <span>ðŸŽ¯ {v.purpose}</span>
                   </div>
                 </div>
                 {v.qrCode && (
@@ -82,12 +82,12 @@ export default function StudentVisitors() {
                 <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">Register Visitor</h2>
                 <button onClick={() => setShowModal(false)} className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"><X size={18} /></button>
               </div>
-              <form onSubmit={handleSubmit(d => addVisitor.mutate(d))} className="space-y-4">
+              <form onSubmit={handleSubmit(d => addVisitor.mutate(d))} className="space-y-4 md:space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Visitor Name *</label>
                   <input {...register('visitorName', { required: true })} placeholder="Full name" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Phone *</label>
                     <input {...register('visitorPhone', { required: true })} type="tel" placeholder="9876543210" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
@@ -97,7 +97,7 @@ export default function StudentVisitors() {
                     <input {...register('relation')} placeholder="Father, Friend..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Expected Date *</label>
                     <input {...register('expectedDate', { required: true })} type="date" min={new Date().toISOString().split('T')[0]} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />

@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 
 const fetchNotices = async () => { const res = await API.get('/notices?limit=50'); return res.data.data; };
 
-const CATEGORY_ICONS: Record<string, string> = { general: '📢', academic: '📚', maintenance: '🔧', emergency: '🚨', event: '🎉', hostel: '🏠' };
+const CATEGORY_ICONS: Record<string, string> = { general: 'ðŸ“¢', academic: 'ðŸ“š', maintenance: 'ðŸ”§', emergency: 'ðŸš¨', event: 'ðŸŽ‰', hostel: 'ðŸ ' };
 
 export default function NoticesPage() {
   const [showModal, setShowModal] = useState(false);
@@ -44,20 +44,20 @@ export default function NoticesPage() {
       </div>
 
       {isLoading ? (
-        <div className="grid gap-4">{Array(4).fill(0).map((_, i) => <div key={i} className="skeleton h-28 rounded-2xl" />)}</div>
+        <div className="grid gap-4 md:gap-6">{Array(4).fill(0).map((_, i) => <div key={i} className="skeleton h-28 rounded-2xl" />)}</div>
       ) : !notices?.length ? (
         <div className="text-center py-20 bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700">
           <Bell size={48} className="text-slate-200 mx-auto mb-4" />
           <p className="text-slate-500">No notices yet</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4 md:space-y-6">
           {notices.map((notice: any, i: number) => (
             <motion.div key={notice._id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
               className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-5 group hover:shadow-md transition-all">
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-4 md:gap-6">
                 <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center text-lg flex-shrink-0">
-                  {CATEGORY_ICONS[notice.category] || '📢'}
+                  {CATEGORY_ICONS[notice.category] || 'ðŸ“¢'}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
@@ -66,7 +66,7 @@ export default function NoticesPage() {
                     <span className="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 px-2 py-0.5 rounded-full capitalize">{notice.category}</span>
                   </div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 mb-2 line-clamp-2">{notice.content}</p>
-                  <div className="flex items-center gap-4 text-xs text-slate-400">
+                  <div className="flex items-center gap-4 md:gap-6 text-xs text-slate-400">
                     <span>By {notice.publishedBy?.name}</span>
                     <span>{formatDate(notice.createdAt)}</span>
                     {notice.expiresAt && <span>Expires: {formatDate(notice.expiresAt)}</span>}
@@ -91,7 +91,7 @@ export default function NoticesPage() {
                 <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">Post Notice</h2>
                 <button onClick={() => setShowModal(false)} className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"><X size={18} /></button>
               </div>
-              <form onSubmit={handleSubmit(d => createNotice.mutate(d))} className="space-y-4">
+              <form onSubmit={handleSubmit(d => createNotice.mutate(d))} className="space-y-4 md:space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Title *</label>
                   <input {...register('title', { required: true })} placeholder="Notice title" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
@@ -100,7 +100,7 @@ export default function NoticesPage() {
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Content *</label>
                   <textarea {...register('content', { required: true })} rows={4} placeholder="Notice content..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Category</label>
                     <select {...register('category')} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">

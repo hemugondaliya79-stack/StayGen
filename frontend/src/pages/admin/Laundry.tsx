@@ -11,7 +11,7 @@ const STATUS_NEXT: Record<string, string> = {
   requested: 'picked_up', picked_up: 'in_progress', in_progress: 'ready', ready: 'delivered'
 };
 const STATUS_LABELS: Record<string, string> = {
-  requested: '📋 Requested', picked_up: '🧺 Picked Up', in_progress: '🔄 In Progress', ready: '✅ Ready', delivered: '📦 Delivered'
+  requested: 'ðŸ“‹ Requested', picked_up: 'ðŸ§º Picked Up', in_progress: 'ðŸ”„ In Progress', ready: 'âœ… Ready', delivered: 'ðŸ“¦ Delivered'
 };
 
 export default function LaundryPage() {
@@ -39,27 +39,27 @@ export default function LaundryPage() {
           <p className="text-slate-500">No laundry requests</p>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4 md:space-y-6">
           {requests.map((r: any, i: number) => (
             <motion.div key={r._id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}
               className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-5">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 flex-wrap mb-2">
-                    <span className="text-lg">👕</span>
+                    <span className="text-lg">ðŸ‘•</span>
                     <p className="font-semibold text-slate-900 dark:text-white">{r.studentId?.userId?.name || 'Student'}</p>
                     <span className={cn('text-xs px-2 py-0.5 rounded-full font-medium', getStatusColor(r.status))}>{r.status.replace('_', ' ')}</span>
                   </div>
-                  <div className="flex gap-4 text-xs text-slate-500">
-                    <span>🧺 {r.totalItems} item{r.totalItems !== 1 ? 's' : ''}</span>
-                    <span>📅 Pickup: {formatDate(r.pickupDate)}</span>
-                    {r.deliveryDate && <span>📦 Delivery: {formatDate(r.deliveryDate)}</span>}
+                  <div className="flex gap-4 md:gap-6 text-xs text-slate-500">
+                    <span>ðŸ§º {r.totalItems} item{r.totalItems !== 1 ? 's' : ''}</span>
+                    <span>ðŸ“… Pickup: {formatDate(r.pickupDate)}</span>
+                    {r.deliveryDate && <span>ðŸ“¦ Delivery: {formatDate(r.deliveryDate)}</span>}
                   </div>
                   {r.items?.length > 0 && (
                     <div className="flex flex-wrap gap-1 mt-2">
                       {r.items.map((item: any, j: number) => (
                         <span key={j} className="text-xs bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 px-2 py-0.5 rounded-full">
-                          {item.name} ×{item.quantity}
+                          {item.name} Ã—{item.quantity}
                         </span>
                       ))}
                     </div>
@@ -68,7 +68,7 @@ export default function LaundryPage() {
                 {STATUS_NEXT[r.status] && (
                   <button onClick={() => updateStatus.mutate({ id: r._id, status: STATUS_NEXT[r.status] })}
                     className="px-4 py-2 gradient-bg text-white rounded-xl text-sm font-medium hover:opacity-90 transition-opacity whitespace-nowrap">
-                    → {STATUS_LABELS[STATUS_NEXT[r.status]]}
+                    â†’ {STATUS_LABELS[STATUS_NEXT[r.status]]}
                   </button>
                 )}
               </div>

@@ -41,7 +41,7 @@ export default function StudentsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 md:gap-6">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white font-heading">Students</h1>
           <p className="text-slate-500 text-sm mt-1">{pagination.total || 0} total students</p>
@@ -131,10 +131,10 @@ export default function StudentsPage() {
                       </div>
                     </td>
                     <td className="px-5 py-4 hidden sm:table-cell">
-                      <span className="text-sm font-mono text-slate-600 dark:text-slate-400">{student.studentId || '—'}</span>
+                      <span className="text-sm font-mono text-slate-600 dark:text-slate-400">{student.studentId || 'â€”'}</span>
                     </td>
                     <td className="px-5 py-4 hidden md:table-cell">
-                      <p className="text-sm text-slate-700 dark:text-slate-300 max-w-[160px] truncate">{student.course || '—'}</p>
+                      <p className="text-sm text-slate-700 dark:text-slate-300 max-w-[160px] truncate">{student.course || 'â€”'}</p>
                       {student.year && <p className="text-xs text-slate-500">Year {student.year}</p>}
                     </td>
                     <td className="px-5 py-4 hidden lg:table-cell">
@@ -170,7 +170,7 @@ export default function StudentsPage() {
         {pagination.totalPages > 1 && (
           <div className="flex items-center justify-between px-5 py-4 border-t border-slate-100 dark:border-slate-700">
             <p className="text-sm text-slate-500">
-              Showing {((page - 1) * 10) + 1}–{Math.min(page * 10, pagination.total)} of {pagination.total}
+              Showing {((page - 1) * 10) + 1}â€“{Math.min(page * 10, pagination.total)} of {pagination.total}
             </p>
             <div className="flex gap-2">
               <button

@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 const DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 const DAY_LABELS: Record<string, string> = { monday: 'Mon', tuesday: 'Tue', wednesday: 'Wed', thursday: 'Thu', friday: 'Fri', saturday: 'Sat', sunday: 'Sun' };
 const MEALS = ['breakfast', 'lunch', 'snacks', 'dinner'];
-const MEAL_ICONS: Record<string, string> = { breakfast: '☀️', lunch: '🍱', snacks: '🍪', dinner: '🌙' };
+const MEAL_ICONS: Record<string, string> = { breakfast: 'â˜€ï¸', lunch: 'ðŸ±', snacks: 'ðŸª', dinner: 'ðŸŒ™' };
 
 const fetchMenu = () => API.get('/mess/current').then(r => r.data.data);
 
@@ -20,7 +20,7 @@ export default function StudentMess() {
     setRatings(prev => ({ ...prev, [meal]: rating }));
     try {
       await API.post('/mess/rate', { meal, rating, date: new Date() });
-      toast.success('Rating submitted! 🌟');
+      toast.success('Rating submitted! ðŸŒŸ');
     } catch {
       toast.error('Failed to submit rating.');
     }
@@ -57,9 +57,9 @@ export default function StudentMess() {
             </div>
 
             <div className="p-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 {MEALS.map(meal => (
-                  <div key={meal} className="bg-slate-50 dark:bg-slate-700 rounded-xl p-4">
+                  <div key={meal} className="bg-slate-50 dark:bg-slate-700 rounded-xl p-4 md:p-6">
                     <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-2 uppercase tracking-wider">{MEAL_ICONS[meal]} {meal}</p>
                     <p className="text-sm text-slate-800 dark:text-white font-medium mb-3">
                       {(menu.menu?.[activeDay] as any)?.[meal] || <span className="text-slate-400">Not set</span>}
@@ -85,8 +85,8 @@ export default function StudentMess() {
           </div>
 
           {/* Today's highlight */}
-          <div className="gradient-bg rounded-2xl p-5 text-white">
-            <h3 className="font-semibold font-heading mb-3">🍽️ Today's Menu — {new Date().toLocaleDateString('en-IN', { weekday: 'long' })}</h3>
+          <div className="gradient-bg rounded-2xl p-4 md:p-6 text-white">
+            <h3 className="font-semibold font-heading mb-3">ðŸ½ï¸ Today's Menu â€” {new Date().toLocaleDateString('en-IN', { weekday: 'long' })}</h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {MEALS.map(meal => (
                 <div key={meal} className="bg-white/15 backdrop-blur rounded-xl p-3">

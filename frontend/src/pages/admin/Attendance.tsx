@@ -15,7 +15,7 @@ export default function AttendancePage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 md:gap-6">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white font-heading">Attendance</h1>
           <p className="text-slate-500 text-sm mt-1">Today's attendance overview</p>
@@ -26,15 +26,15 @@ export default function AttendancePage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {[
-          { icon: Users, label: 'Total Students', value: isLoading ? '—' : stats?.total || 0, color: 'bg-indigo-500' },
-          { icon: CalendarCheck, label: 'Present Today', value: isLoading ? '—' : stats?.present || 0, color: 'bg-emerald-500' },
-          { icon: Users, label: 'Absent Today', value: isLoading ? '—' : stats?.absent || 0, color: 'bg-red-500' },
-          { icon: TrendingUp, label: 'Attendance %', value: isLoading ? '—' : `${stats?.percentage || 0}%`, color: 'bg-purple-500' },
+          { icon: Users, label: 'Total Students', value: isLoading ? 'â€”' : stats?.total || 0, color: 'bg-indigo-500' },
+          { icon: CalendarCheck, label: 'Present Today', value: isLoading ? 'â€”' : stats?.present || 0, color: 'bg-emerald-500' },
+          { icon: Users, label: 'Absent Today', value: isLoading ? 'â€”' : stats?.absent || 0, color: 'bg-red-500' },
+          { icon: TrendingUp, label: 'Attendance %', value: isLoading ? 'â€”' : `${stats?.percentage || 0}%`, color: 'bg-purple-500' },
         ].map((s, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-100 dark:border-slate-700">
+            className="bg-white dark:bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-100 dark:border-slate-700">
             <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center mb-3', s.color)}>
               <s.icon size={18} className="text-white" />
             </div>
@@ -62,7 +62,7 @@ export default function AttendancePage() {
       {/* Progress bar */}
       <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-5">
         <h3 className="font-semibold text-slate-900 dark:text-white font-heading mb-4">Today's Attendance Rate</h3>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 md:gap-6">
           <div className="flex-1 bg-slate-100 dark:bg-slate-700 rounded-full h-4 overflow-hidden">
             <motion.div
               initial={{ width: 0 }}

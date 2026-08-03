@@ -67,13 +67,15 @@ const seed = async () => {
   }
 
   // Create rooms
+  // Fixed image URLs are stored with each seeded room, rather than being generated
+  // at render time. They therefore remain consistent across admin and student views.
   const roomData = [
-    { roomNumber: '101', floor: 1, block: 'A', type: 'single', capacity: 1, isAC: false, price: 5000 },
-    { roomNumber: '102', floor: 1, block: 'A', type: 'double', capacity: 2, isAC: false, price: 3500 },
-    { roomNumber: '103', floor: 1, block: 'A', type: 'double', capacity: 2, isAC: true, price: 4500 },
-    { roomNumber: '201', floor: 2, block: 'B', type: 'triple', capacity: 3, isAC: false, price: 3000 },
-    { roomNumber: '202', floor: 2, block: 'B', type: 'double', capacity: 2, isAC: true, price: 4500, amenities: ['WiFi', 'Study Table', 'Wardrobe'] },
-    { roomNumber: '301', floor: 3, block: 'C', type: 'single', capacity: 1, isAC: true, price: 6000, isAttached: true },
+    { roomNumber: '101', floor: 1, block: 'A', type: 'single', capacity: 1, isAC: false, price: 5000, images: [{ url: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=85' }] },
+    { roomNumber: '102', floor: 1, block: 'A', type: 'double', capacity: 2, isAC: false, price: 3500, images: [{ url: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=85' }] },
+    { roomNumber: '103', floor: 1, block: 'A', type: 'double', capacity: 2, isAC: true, price: 4500, images: [{ url: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=85' }] },
+    { roomNumber: '201', floor: 2, block: 'B', type: 'triple', capacity: 3, isAC: false, price: 3000, images: [{ url: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=1200&q=85' }] },
+    { roomNumber: '202', floor: 2, block: 'B', type: 'double', capacity: 2, isAC: true, price: 4500, amenities: ['WiFi', 'Study Table', 'Wardrobe'], images: [{ url: 'https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=1200&q=85' }] },
+    { roomNumber: '301', floor: 3, block: 'C', type: 'single', capacity: 1, isAC: true, price: 6000, isAttached: true, images: [{ url: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=85' }] },
   ];
   const rooms = await Room.insertMany(roomData);
 

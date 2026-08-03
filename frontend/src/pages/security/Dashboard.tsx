@@ -45,7 +45,7 @@ export default function SecurityDashboard() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6">
         {[
           { icon: UserCheck, label: 'Awaiting Entry', value: approved.length, color: 'bg-amber-500' },
           { icon: Users, label: 'Inside Now', value: checkedIn.length, color: 'bg-emerald-500' },
@@ -53,7 +53,7 @@ export default function SecurityDashboard() {
           { icon: Clock, label: 'Avg Duration', value: `${stats?.avgDuration || 0}m`, color: 'bg-purple-500' },
         ].map((s, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-100 dark:border-slate-700">
+            className="bg-white dark:bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-100 dark:border-slate-700">
             <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center mb-3', s.color)}>
               <s.icon size={18} className="text-white" />
             </div>
@@ -80,7 +80,7 @@ export default function SecurityDashboard() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-sm text-slate-900 dark:text-white truncate">{v.visitorName}</p>
-                  <p className="text-xs text-slate-500">{v.studentId?.userId?.name} · {v.purpose}</p>
+                  <p className="text-xs text-slate-500">{v.studentId?.userId?.name} Â· {v.purpose}</p>
                 </div>
                 <button onClick={() => checkIn.mutate(v._id)} className="flex items-center gap-1.5 px-3 py-2 bg-emerald-500 text-white rounded-xl text-xs font-medium hover:bg-emerald-600 transition-colors flex-shrink-0">
                   <LogIn size={13} /> Check In
@@ -106,7 +106,7 @@ export default function SecurityDashboard() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-sm text-slate-900 dark:text-white truncate">{v.visitorName}</p>
-                  <p className="text-xs text-slate-500">{formatRelativeTime(v.checkIn)} · {v.studentId?.userId?.name}</p>
+                  <p className="text-xs text-slate-500">{formatRelativeTime(v.checkIn)} Â· {v.studentId?.userId?.name}</p>
                 </div>
                 <button onClick={() => checkOut.mutate(v._id)} className="flex items-center gap-1.5 px-3 py-2 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-medium hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors flex-shrink-0">
                   <LogOut size={13} /> Check Out

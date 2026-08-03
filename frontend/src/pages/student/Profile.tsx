@@ -93,9 +93,9 @@ export default function StudentProfile() {
 
       {/* Info cards */}
       {isLoading ? (
-        <div className="grid grid-cols-2 gap-4">{Array(4).fill(0).map((_, i) => <div key={i} className="skeleton h-20 rounded-2xl" />)}</div>
+        <div className="grid grid-cols-2 gap-4 md:gap-6">{Array(4).fill(0).map((_, i) => <div key={i} className="skeleton h-20 rounded-2xl" />)}</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
           {[
             { icon: GraduationCap, label: 'Course', value: student?.course || 'Not set', sub: student?.year ? `Year ${student.year}` : '' },
             { icon: MapPin, label: 'College', value: student?.college || 'Not set', sub: '' },
@@ -119,8 +119,8 @@ export default function StudentProfile() {
       {/* Edit form */}
       <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-6">
         <h3 className="font-semibold text-slate-900 dark:text-white font-heading mb-4">Edit Information</h3>
-        <form onSubmit={handleSubmit(d => updateProfile.mutate(d))} className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit(d => updateProfile.mutate(d))} className="space-y-4 md:space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Phone Number</label>
               <input {...register('phone')} type="tel" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />

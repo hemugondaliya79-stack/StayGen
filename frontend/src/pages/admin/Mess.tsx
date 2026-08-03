@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 const DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 const MEALS = ['breakfast', 'lunch', 'snacks', 'dinner'];
 const DAY_LABELS: Record<string, string> = { monday: 'Mon', tuesday: 'Tue', wednesday: 'Wed', thursday: 'Thu', friday: 'Fri', saturday: 'Sat', sunday: 'Sun' };
-const MEAL_ICONS: Record<string, string> = { breakfast: '☀️', lunch: '🍱', snacks: '🍪', dinner: '🌙' };
+const MEAL_ICONS: Record<string, string> = { breakfast: 'â˜€ï¸', lunch: 'ðŸ±', snacks: 'ðŸª', dinner: 'ðŸŒ™' };
 
 const fetchMenu = () => API.get('/mess/current').then(r => r.data.data);
 const fetchRatings = () => API.get('/mess/ratings').then(r => r.data.data);
@@ -40,7 +40,7 @@ export default function MessPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 md:gap-6">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white font-heading">Mess Management</h1>
           <p className="text-slate-500 text-sm mt-1">Weekly menu and food ratings</p>
@@ -52,9 +52,9 @@ export default function MessPage() {
 
       {/* Today's highlight */}
       {todayMenu && (
-        <div className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-5 text-white">
+        <div className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-4 md:p-6 text-white">
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-xl">🍽️</span>
+            <span className="text-xl">ðŸ½ï¸</span>
             <h3 className="font-semibold font-heading">Today's Menu</h3>
             <span className="text-white/70 text-sm">{new Date().toLocaleDateString('en-IN', { weekday: 'long' })}</span>
           </div>
@@ -73,7 +73,7 @@ export default function MessPage() {
       {ratings && ratings.length > 0 && (
         <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-5">
           <h3 className="font-semibold text-slate-900 dark:text-white font-heading mb-4">Average Ratings</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6">
             {ratings.map((r: any) => (
               <div key={r._id} className="text-center">
                 <p className="text-sm text-slate-500 mb-1">{MEAL_ICONS[r._id]} {r._id}</p>
@@ -102,9 +102,9 @@ export default function MessPage() {
             ))}
           </div>
           <div className="p-5">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6">
               {MEALS.map(meal => (
-                <div key={meal} className="bg-slate-50 dark:bg-slate-700 rounded-xl p-4">
+                <div key={meal} className="bg-slate-50 dark:bg-slate-700 rounded-xl p-4 md:p-6">
                   <p className="text-xs font-semibold text-slate-500 mb-2 uppercase tracking-wider">{MEAL_ICONS[meal]} {meal}</p>
                   <p className="text-sm text-slate-800 dark:text-white">{(menu.menu?.[activeDay] as any)?.[meal] || <span className="text-slate-400">Not set</span>}</p>
                 </div>

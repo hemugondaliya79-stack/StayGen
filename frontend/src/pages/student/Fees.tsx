@@ -20,20 +20,20 @@ export default function StudentFees() {
       </div>
 
       {/* Summary */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="gradient-bg rounded-2xl p-5 text-white">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+        <div className="gradient-bg rounded-2xl p-4 md:p-6 text-white">
           <p className="text-white/70 text-sm mb-1">Total Due</p>
           <p className="text-3xl font-bold font-heading">{formatCurrency(totalDue)}</p>
           <p className="text-white/70 text-xs mt-1">{pending.length} pending invoices</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-100 dark:border-slate-700">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-100 dark:border-slate-700">
           <div className="flex items-center gap-2 mb-2">
             <Clock size={16} className="text-amber-500" />
             <p className="text-sm text-slate-500">Pending</p>
           </div>
           <p className="text-2xl font-bold text-slate-900 dark:text-white">{pending.length}</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-100 dark:border-slate-700">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 md:p-6 border border-slate-100 dark:border-slate-700">
           <div className="flex items-center gap-2 mb-2">
             <CheckCircle size={16} className="text-emerald-500" />
             <p className="text-sm text-slate-500">Paid</p>
@@ -50,18 +50,18 @@ export default function StudentFees() {
             {pending.map((fee: any, i: number) => (
               <motion.div key={fee._id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
                 className="bg-white dark:bg-slate-800 rounded-2xl border border-amber-100 dark:border-amber-900/30 p-5">
-                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 md:gap-6">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 flex-wrap mb-1">
                       <h3 className="font-semibold text-slate-900 dark:text-white capitalize">{fee.type} Fee</h3>
                       <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-medium">{fee.month}</span>
                     </div>
-                    <div className="flex gap-4 text-xs text-slate-500">
+                    <div className="flex gap-4 md:gap-6 text-xs text-slate-500">
                       <span>Invoice: <code className="text-slate-700 dark:text-slate-300">{fee.invoiceNumber}</code></span>
                       <span>Due: <span className={new Date(fee.dueDate) < new Date() ? 'text-red-500 font-medium' : ''}>{formatDate(fee.dueDate)}</span></span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4 md:gap-6">
                     <div className="text-right">
                       <p className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency(fee.finalAmount || fee.amount)}</p>
                       {fee.discount > 0 && <p className="text-xs text-emerald-600">-{formatCurrency(fee.discount)} off</p>}
@@ -106,7 +106,7 @@ export default function StudentFees() {
                     <td className="px-5 py-3 text-sm text-slate-600 dark:text-slate-400 hidden sm:table-cell">{fee.month}</td>
                     <td className="px-5 py-3 text-sm font-semibold text-slate-900 dark:text-white">{formatCurrency(fee.finalAmount || fee.amount)}</td>
                     <td className="px-5 py-3"><span className={cn('text-xs px-2.5 py-1 rounded-full font-medium', getStatusColor(fee.status))}>{fee.status}</span></td>
-                    <td className="px-5 py-3 text-sm text-slate-500 hidden md:table-cell">{fee.paidDate ? formatDate(fee.paidDate) : '—'}</td>
+                    <td className="px-5 py-3 text-sm text-slate-500 hidden md:table-cell">{fee.paidDate ? formatDate(fee.paidDate) : 'â€”'}</td>
                   </tr>
                 ))}
               </tbody>

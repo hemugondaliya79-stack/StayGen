@@ -13,7 +13,7 @@ const fetchInventory = async (page: number) => {
 };
 
 const CATEGORY_ICONS: Record<string, string> = {
-  furniture: '🪑', electronics: '💻', cleaning: '🧹', kitchen: '🍳', sports: '⚽', stationery: '✏️', other: '📦'
+  furniture: 'ðŸª‘', electronics: 'ðŸ’»', cleaning: 'ðŸ§¹', kitchen: 'ðŸ³', sports: 'âš½', stationery: 'âœï¸', other: 'ðŸ“¦'
 };
 const CONDITION_COLORS: Record<string, string> = {
   good: 'bg-emerald-100 text-emerald-700', fair: 'bg-amber-100 text-amber-700',
@@ -56,7 +56,7 @@ export default function InventoryPage() {
       </div>
 
       {isLoading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {Array(8).fill(0).map((_, i) => <div key={i} className="skeleton h-40 rounded-2xl" />)}
         </div>
       ) : items.length === 0 ? (
@@ -65,15 +65,15 @@ export default function InventoryPage() {
           <p className="text-slate-500">No inventory items yet</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {items.map((item: any, i: number) => (
             <motion.div key={item._id} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.04 }}
               className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-4 group hover:shadow-md transition-all">
               <div className="flex items-start justify-between mb-3">
-                <span className="text-2xl">{CATEGORY_ICONS[item.category] || '📦'}</span>
+                <span className="text-2xl">{CATEGORY_ICONS[item.category] || 'ðŸ“¦'}</span>
                 <div className="flex items-center gap-2">
                   {item.quantity <= item.minQuantity && (
-                    <span className="text-amber-500 text-xs font-bold">⚠️</span>
+                    <span className="text-amber-500 text-xs font-bold">âš ï¸</span>
                   )}
                   <button onClick={() => { if (confirm('Delete?')) deleteItem.mutate(item._id); }}
                     className="p-1 rounded-lg text-slate-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all">
@@ -95,7 +95,7 @@ export default function InventoryPage() {
               </div>
               {item.quantity <= item.minQuantity && (
                 <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-700">
-                  <p className="text-xs text-amber-600 font-medium">⚠️ Low stock — reorder needed</p>
+                  <p className="text-xs text-amber-600 font-medium">âš ï¸ Low stock â€” reorder needed</p>
                 </div>
               )}
             </motion.div>
@@ -119,12 +119,12 @@ export default function InventoryPage() {
                 <h2 className="text-xl font-bold text-slate-900 dark:text-white font-heading">Add Inventory Item</h2>
                 <button onClick={() => setShowModal(false)} className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"><X size={18} /></button>
               </div>
-              <form onSubmit={handleSubmit(d => createItem.mutate(d))} className="space-y-4">
+              <form onSubmit={handleSubmit(d => createItem.mutate(d))} className="space-y-4 md:space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Item Name *</label>
                   <input {...register('name', { required: true })} placeholder="e.g. Study Chair" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Category</label>
                     <select {...register('category')} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">

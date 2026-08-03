@@ -9,7 +9,7 @@ const { paginate, paginateResponse } = require('../utils/pagination');
 
 // GET all rooms
 router.get('/', protect, asyncHandler(async (req, res) => {
-  const { page = 1, limit = 10, status, type, isAC, floor, search } = req.query;
+  const { page = 1, limit = 10, status, type, isAC, floor, featured, search } = req.query;
   const { skip } = paginate(null, page, limit);
 
   let query = {};
@@ -17,6 +17,7 @@ router.get('/', protect, asyncHandler(async (req, res) => {
   if (type) query.type = type;
   if (isAC !== undefined) query.isAC = isAC === 'true';
   if (floor) query.floor = parseInt(floor);
+  if (featured !== undefined) query.featured = featured === 'true';
   if (search) query.roomNumber = { $regex: search, $options: 'i' };
 
   const total = await Room.countDocuments(query);
@@ -72,12 +73,31 @@ router.post('/:id/images', protect, authorize('super_admin', 'hostel_admin'), up
   const room = await Room.findById(req.params.id);
   if (!room) return res.status(404).json({ success: false, message: 'Room not found.' });
 
-  const uploadPromises = req.files.map(f => uploadImageBuffer(f.buffer, 'staygen/rooms', f.mimetype));
+  const remainingSlots = 5 - room.images.length;
+  if (remainingSlots <= 0) return res.status(400).json({ success: false, message: 'A room can have at most 5 images.' });
+  const files = (req.files || []).slice(0, remainingSlots);
+  if (!files.length) return res.status(400).json({ success: false, message: 'Select at least one image to upload.' });
+  const uploadPromises = files.map(f => uploadImageBuffer(f.buffer, 'staygen/rooms', f.mimetype));
   const uploaded = await Promise.all(uploadPromises);
   room.images.push(...uploaded.map(({ url, publicId }) => ({ url, publicId })));
   await room.save();
 
   res.json({ success: true, message: 'Images uploaded.', data: room.images });
+}));
+
+// DELETE one room image (Cloudinary assets are removed when a public ID exists)
+router.delete('/:id/images/:imageId', protect, authorize('super_admin', 'hostel_admin'), asyncHandler(async (req, res) => {
+  const room = await Room.findById(req.params.id);
+  if (!room) return res.status(404).json({ success: false, message: 'Room not found.' });
+
+  const image = room.images.id(req.params.imageId);
+  if (!image) return res.status(404).json({ success: false, message: 'Image not found.' });
+  if (image.publicId) {
+    try { await deleteImage(image.publicId); } catch (error) { /* Keep DB state consistent even if Cloudinary already removed it. */ }
+  }
+  image.deleteOne();
+  await room.save();
+  res.json({ success: true, message: 'Room image deleted.', data: room.images });
 }));
 
 module.exports = router;

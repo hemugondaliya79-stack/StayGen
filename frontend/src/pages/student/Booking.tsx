@@ -45,13 +45,13 @@ export default function StudentBooking() {
           <h3 className="font-semibold text-slate-900 dark:text-white mb-3">My Bookings</h3>
           <div className="space-y-3">
             {myBookings.map((b: any, i: number) => (
-              <div key={i} className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-4 flex items-center gap-4">
+              <div key={i} className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-4 flex items-center gap-4 md:gap-6">
                 <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center flex-shrink-0">
                   <BedDouble size={18} className="text-indigo-600" />
                 </div>
                 <div className="flex-1">
                   <p className="font-semibold text-slate-900 dark:text-white">Room {b.roomId?.roomNumber}</p>
-                  <p className="text-xs text-slate-500">Check in: {formatDate(b.checkIn)} · {b.roomId?.type} room</p>
+                  <p className="text-xs text-slate-500">Check in: {formatDate(b.checkIn)} Â· {b.roomId?.type} room</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className={cn('text-xs px-2.5 py-1 rounded-full font-medium', getStatusColor(b.status))}>{b.status}</span>
@@ -70,7 +70,7 @@ export default function StudentBooking() {
       <div>
         <h3 className="font-semibold text-slate-900 dark:text-white mb-3">Available Rooms</h3>
         {roomsLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {Array(6).fill(0).map((_, i) => <div key={i} className="skeleton h-52 rounded-2xl" />)}
           </div>
         ) : !rooms?.length ? (
@@ -79,12 +79,21 @@ export default function StudentBooking() {
             <p className="text-slate-500">No rooms available at the moment</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {rooms.map((room: any, i: number) => (
               <motion.div key={room._id} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.05 }}
                 className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 p-5 hover:shadow-lg hover:shadow-indigo-500/5 transition-all">
-                <div className="h-24 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-700 dark:to-slate-600 flex items-center justify-center mb-4">
-                  <BedDouble size={28} className="text-indigo-300" />
+                <div className="h-32 rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-slate-700 dark:to-slate-600 flex items-center justify-center mb-4 overflow-hidden">
+                  {room.images?.[0]?.url ? (
+                    <img
+                      src={room.images[0].url}
+                      alt={`Room ${room.roomNumber}`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <BedDouble size={28} className="text-indigo-300" />
+                  )}
                 </div>
                 <div className="flex items-start justify-between mb-3">
                   <div>
@@ -132,7 +141,7 @@ export default function StudentBooking() {
                 </div>
                 <button onClick={() => setShowModal(false)} className="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"><X size={18} /></button>
               </div>
-              <form onSubmit={handleSubmit(d => createBooking.mutate(d))} className="space-y-4">
+              <form onSubmit={handleSubmit(d => createBooking.mutate(d))} className="space-y-4 md:space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Check-in Date *</label>
                   <input {...register('checkIn', { required: true })} type="date" min={new Date().toISOString().split('T')[0]} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" />
