@@ -78,7 +78,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stat cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {isLoading
           ? Array(8).fill(0).map((_, i) => <SkeletonCard key={i} />)
           : statCards.map((card, i) => <StatCard key={i} {...card} delay={i * 0.05} />)

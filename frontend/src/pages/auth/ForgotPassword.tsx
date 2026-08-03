@@ -12,7 +12,7 @@ export default function ForgotPasswordPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return toast.error('Please enter your email.');
+    if (!email) return toast.error('Please enter your email address.');
     setLoading(true);
     try {
       await API.post('/auth/forgot-password', { email });
@@ -26,44 +26,94 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
-        <div className="bg-white rounded-3xl border border-slate-100 p-8 shadow-xl shadow-slate-100">
-          <div className="w-14 h-14 rounded-2xl gradient-bg flex items-center justify-center mx-auto mb-6">
-            <Mail size={24} className="text-white" />
+    <div className="min-h-screen min-h-[100dvh] flex items-center justify-center bg-[#F8FAFC] dark:bg-slate-950 px-4 py-8 sm:py-12">
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="w-full max-w-[500px]"
+      >
+        <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-xl shadow-slate-900/5">
+          {/* Header & Logo */}
+          <div className="text-center mb-6">
+            <Link to="/" className="inline-flex items-center gap-2.5 mb-4 group">
+              <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+                <span className="text-white font-extrabold text-base font-heading">S</span>
+              </div>
+              <span className="font-extrabold text-slate-900 dark:text-white font-heading text-2xl tracking-tight">
+                StayGen
+              </span>
+            </Link>
           </div>
+
           {!sent ? (
             <>
-              <h2 className="text-2xl font-bold text-slate-900 font-heading text-center mb-2">Forgot Password?</h2>
-              <p className="text-slate-500 text-center mb-8 text-sm">Enter your email and we'll send you a 6-digit OTP to reset your password.</p>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="text-center mb-8">
+                <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-slate-900 dark:text-white tracking-tight">
+                  Forgot Password?
+                </h1>
+                <p className="text-slate-500 dark:text-slate-400 text-sm mt-2 leading-relaxed">
+                  Enter your registered email and we'll send a 6-digit OTP code to reset your password.
+                </p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1.5">Email Address</label>
-                  <div className="relative">
-                    <Mail size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                    <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900 placeholder-slate-400" />
+                  <label htmlFor="email" className="block text-sm font-semibold text-slate-800 dark:text-slate-200 mb-2">
+                    Email Address
+                  </label>
+                  <div className="relative w-full flex items-center">
+                    <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none z-10" />
+                    <input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      placeholder="you@example.com"
+                      className="input-auth input-has-left-icon"
+                      required
+                    />
                   </div>
                 </div>
-                <button type="submit" disabled={loading} className="w-full gradient-bg text-white font-semibold py-3.5 rounded-xl hover:opacity-90 flex items-center justify-center gap-2 disabled:opacity-60">
-                  {loading ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : <><ArrowRight size={18} /> Send OTP</>}
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full h-13 min-h-[52px] gradient-bg text-white font-bold text-base rounded-xl shadow-md hover:opacity-95 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+                >
+                  {loading ? (
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  ) : (
+                    <>
+                      <span>Send OTP Code</span>
+                      <ArrowRight size={18} />
+                    </>
+                  )}
                 </button>
               </form>
             </>
           ) : (
-            <div className="text-center">
-              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">📧</span>
+            <div className="text-center py-4">
+              <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Mail size={28} />
               </div>
-              <h2 className="text-2xl font-bold text-slate-900 font-heading mb-2">Check Your Email</h2>
-              <p className="text-slate-500 text-sm mb-6">We've sent a 6-digit OTP to <strong>{email}</strong>. It expires in 10 minutes.</p>
-              <Link to={`/reset-password?email=${encodeURIComponent(email)}`} className="gradient-bg text-white font-semibold py-3 px-6 rounded-xl hover:opacity-90 inline-flex items-center gap-2">
-                Enter OTP <ArrowRight size={18} />
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white font-heading mb-2">Check Your Email</h2>
+              <p className="text-slate-500 dark:text-slate-400 text-sm mb-6 leading-relaxed">
+                We've sent a 6-digit OTP code to <strong className="text-slate-900 dark:text-white">{email}</strong>. It expires in 10 minutes.
+              </p>
+              <Link
+                to={`/reset-password?email=${encodeURIComponent(email)}`}
+                className="gradient-bg text-white font-bold px-6 py-3.5 rounded-xl hover:opacity-95 shadow-md inline-flex items-center justify-center gap-2 min-h-[48px] w-full"
+              >
+                <span>Enter OTP Code</span>
+                <ArrowRight size={18} />
               </Link>
             </div>
           )}
-          <div className="text-center mt-6">
-            <Link to="/login" className="text-slate-500 text-sm hover:text-slate-700 inline-flex items-center gap-1">
-              <ArrowLeft size={14} /> Back to Login
+
+          <div className="text-center mt-8 pt-6 border-t border-slate-100 dark:border-slate-800">
+            <Link to="/login" className="text-slate-600 dark:text-slate-400 text-sm font-semibold hover:text-indigo-600 dark:hover:text-indigo-400 inline-flex items-center gap-1.5">
+              <ArrowLeft size={16} /> Back to Sign In
             </Link>
           </div>
         </div>
